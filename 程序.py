@@ -72,7 +72,6 @@ predict_button = st.sidebar.button("Predict Survival", use_container_width=True,
 if predict_button:
     st.divider()
     st.subheader("📊 Survival Prediction Results")
-    
     try:
         # Create DataFrame with correct column names
         input_df = pd.DataFrame(features, columns=feature_names)
@@ -87,7 +86,7 @@ if predict_button:
             median_survival = "Not reached"
         
         # Calculate hazard ratio
-        hazard_ratio = np.exp(cph.predict_partial_hazard(input_df).values[0]
+        hazard_ratio = np.exp(cph.predict_partial_hazard(input_df).values[0])
         
         # Calculate 1-year survival probability
         try:
