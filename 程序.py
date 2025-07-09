@@ -52,11 +52,11 @@ st.sidebar.markdown("""
 st.sidebar.header("Input Clinical Parameters")
 
 # Only three inputs
-KPS = st.sidebar.slider("KPS Score", 50, 100, 80, 
+KPS = st.sidebar.slider("KPS Score", 0, 100, 80, 
                         help="Functional assessment score (higher = better function)")
-Na = st.sidebar.slider("Sodium (Na) mmol/L", 120, 150, 140, 
+Na = st.sidebar.slider("Sodium (Na) mmol/L", 0, 150, 140, 
                        help="Serum sodium level")
-Cl = st.sidebar.slider("Chloride (Cl) mmol/L", 90, 120, 105, 
+Cl = st.sidebar.slider("Chloride (Cl) mmol/L", 0, 137, 105, 
                        help="Serum chloride level")
 
 # Create feature array
@@ -150,7 +150,7 @@ if predict_button:
                 'Feature': ["KPS", "Na", "Cl"],
                 'Coefficient': [-0.05, -0.02, -0.01],
                 'Hazard Ratio': [0.95, 0.98, 0.99],
-                'p-value': ["<0.005", "0.02", "0.05"]
+                'p-value': ["<0.005", "0.02", "0.01"]
             }
             
             coef_df = pd.DataFrame(coef_data)
@@ -160,7 +160,7 @@ if predict_button:
             **Interpretation:**
             - **KPS**: Hazard Ratio 0.95 (p<0.005) - Higher KPS score reduces risk by 5%
             - **Na**: Hazard Ratio 0.98 (p=0.02) - Higher sodium levels associated with better survival
-            - **Cl**: Hazard Ratio 0.99 (p=0.05) - Higher chloride levels associated with better survival
+            - **Cl**: Hazard Ratio 0.99 (p=0.01) - Higher chloride levels associated with better survival
             """)
             
             st.markdown("""
@@ -248,5 +248,5 @@ with st.expander("ℹ️ User Guide"):
 
 # Footer
 st.divider()
-st.caption("© 2025 Simplified Survival Analysis | Cox Proportional Hazards Model")
-st.caption("Developed for clinical research use only")
+st.caption("© 2025 Leptomeningeal Metastasis Survival Analysis | Cox Proportional Hazards Model")
+st.caption("Original paper: Machine Learning for Predicting Leptomeningeal Metastasis and Prognosis in Lung Adenocarcinoma: a multi-center retrospective study Using the \"Prompt\" Model.")
