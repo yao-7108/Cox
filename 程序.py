@@ -8,7 +8,7 @@ from lifelines import KaplanMeierFitter
 
 # Page configuration
 st.set_page_config(
-    page_title="Cox Survival Analysis (KPS, NA, CL)",
+    page_title="Cox Survival Analysis (KPS, Na, Cl)",
     layout="centered",
     page_icon="📊"
 )
@@ -43,8 +43,8 @@ st.sidebar.markdown("""
 - **Model Type**: Cox Proportional Hazards
 - **Key Predictors**: 
   - KPS (Karnofsky Performance Status)
-  - NA (Sodium)
-  - CL (Chloride)
+  - Na (Sodium)
+  - Cl (Chloride)
 - **Outcome**: Survival time
 """)
 
@@ -54,16 +54,16 @@ st.sidebar.header("Input Clinical Parameters")
 # Only three inputs
 KPS = st.sidebar.slider("KPS Score", 50, 100, 80, 
                         help="Functional assessment score (higher = better function)")
-NA = st.sidebar.slider("Sodium (NA) mmol/L", 120, 150, 140, 
+Na = st.sidebar.slider("Sodium (Na) mmol/L", 120, 150, 140, 
                        help="Serum sodium level")
-CL = st.sidebar.slider("Chloride (CL) mmol/L", 90, 120, 105, 
+Cl = st.sidebar.slider("Chloride (Cl) mmol/L", 90, 120, 105, 
                        help="Serum chloride level")
 
 # Create feature array
-features = np.array([KPS, NA, CL]).reshape(1, -1)
+features = np.array([KPS, Na, Cl]).reshape(1, -1)
 
 # Feature names
-feature_names = ["KPS", "NA", "CL"]
+feature_names = ["KPS", "Na", "Cl"]
 
 # Prediction button
 predict_button = st.sidebar.button("Predict Survival", use_container_width=True, type="primary")
@@ -72,6 +72,7 @@ predict_button = st.sidebar.button("Predict Survival", use_container_width=True,
 if predict_button:
     st.divider()
     st.subheader("📊 Survival Prediction Results")
+
     try:
         # Create DataFrame with correct column names
         input_df = pd.DataFrame(features, columns=feature_names)
@@ -146,7 +147,7 @@ if predict_button:
             
             # Create coefficient table
             coef_data = {
-                'Feature': ["KPS", "NA", "CL"],
+                'Feature': ["KPS", "Na", "Cl"],
                 'Coefficient': [-0.05, -0.02, -0.01],
                 'Hazard Ratio': [0.95, 0.98, 0.99],
                 'p-value': ["<0.005", "0.02", "0.05"]
@@ -158,14 +159,14 @@ if predict_button:
             st.markdown("""
             **Interpretation:**
             - **KPS**: Hazard Ratio 0.95 (p<0.005) - Higher KPS score reduces risk by 5%
-            - **NA**: Hazard Ratio 0.98 (p=0.02) - Higher sodium levels associated with better survival
-            - **CL**: Hazard Ratio 0.99 (p=0.05) - Higher chloride levels associated with better survival
+            - **Na**: Hazard Ratio 0.98 (p=0.02) - Higher sodium levels associated with better survival
+            - **Cl**: Hazard Ratio 0.99 (p=0.05) - Higher chloride levels associated with better survival
             """)
             
             st.markdown("""
             **Clinical Significance:**
             - KPS is the strongest predictor of survival
-            - Electrolyte balance (NA and CL) shows significant impact on survival
+            - Electrolyte balance (Na and Cl) shows significant impact on survival
             - All three parameters are protective factors (HR < 1)
             """)
             
@@ -184,12 +185,12 @@ This simplified Cox Proportional Hazards model focuses on three key clinical par
    - Scale: 0-100 (higher = better function)
    - Strong predictor of survival outcomes
 
-2. **NA (Serum Sodium)**:
+2. **Na (Serum Sodium)**:
    - Essential electrolyte for cellular function
    - Normal range: 135-145 mmol/L
    - Hyponatremia associated with worse prognosis
 
-3. **CL (Serum Chloride)**:
+3. **Cl (Serum Chloride)**:
    - Important anion for fluid balance
    - Normal range: 98-106 mmol/L
    - Abnormal levels may indicate metabolic disturbances
@@ -236,8 +237,8 @@ with st.expander("ℹ️ User Guide"):
     
     **Parameter Ranges:**
     - **KPS**: 50-100 (typical clinical range)
-    - **NA**: 120-150 mmol/L (clinical range including abnormal values)
-    - **CL**: 90-120 mmol/L (clinical range including abnormal values)
+    - **Na**: 120-150 mmol/L (clinical range including abnormal values)
+    - **Cl**: 90-120 mmol/L (clinical range including abnormal values)
     
     **Clinical Notes:**
     - Model based on retrospective multi-center data
