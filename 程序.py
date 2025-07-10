@@ -8,12 +8,12 @@ from lifelines import KaplanMeierFitter
 
 # Page configuration
 st.set_page_config(
-    page_title="Cox Survival Analysis (KPS, Na, Cl)",
+    page_title="Prognostic Prediction for LUAD-LM Patients”",
     layout="centered",
     page_icon="📊"
 )
 
-st.title("Cox Proportional Hazards Survival Analysis")
+st.title("Prognostic Prediction for LUAD-LM Patients")
 st.markdown("""
 <style>
 div[data-testid="stSidebar"] {
